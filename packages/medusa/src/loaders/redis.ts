@@ -17,8 +17,8 @@ async function redisLoader({
 }: Options): Promise<void> {
   if (configModule.projectConfig.redis_url) {
     // Economical way of dealing with redis clients
-    const client = new RealRedis(configModule.projectConfig.redis_url)
-    const subscriber = new RealRedis(configModule.projectConfig.redis_url)
+    const client = new RealRedis({path: configModule.projectConfig.redis_url, options: configModule.projectConfig.redis_extras}),
+    const subscriber = new RealRedis({path: configModule.projectConfig.redis_url, options: configModule.projectConfig.redis_extras})
 
     container.register({
       redisClient: asValue(client),
